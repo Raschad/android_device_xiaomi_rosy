@@ -21,17 +21,16 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from rosy device
 $(call inherit-product, device/xiaomi/rosy/device.mk)
 
-# Inherit some common EvoX-ify stuff.
+# Inherit some common AICP-ify stuff.
 TARGET_BOOT_ANIMATION_RES := 720
-TARGET_BOOT_ANIMATION_RES_EVO := true
-TARGET_GAPPS_ARCH := arm64
-CUSTOM_BUILD_TYPE := OFFICIAL
-TARGET_INCLUDE_STOCK_ARCORE := true
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+$(call inherit-product, vendor/aicp/config/common_full_phone.mk)
+
+# Inherit from custom vendor
+$(call inherit-product-if-exists, vendor/MiuiCamera/config.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := rosy
-PRODUCT_NAME := aosp_rosy
+PRODUCT_NAME := aicp_rosy
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi 5
 PRODUCT_MANUFACTURER := Xiaomi
@@ -45,3 +44,8 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := Xiaomi/rosy/rosy:7.1.2/N2G47H/V9.2.3.0.NDAMIEK:user/release-keys
+
+
+# AICP Device Maintainers
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    DEVICE_MAINTAINERS="Raschad"
